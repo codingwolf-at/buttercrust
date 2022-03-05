@@ -1,15 +1,14 @@
-import './App.css';
-import { Typography } from "@mui/material";
+import { CssBaseline } from '@mui/material';
 import { Outlet } from 'react-router-dom';
+import { Header } from './components';
 
 function App() {
   return (
-    <div className="App">
-      <Typography variant="h1" component="div" gutterBottom>
-        hello react
-      </Typography>
+    <>
+      <CssBaseline />
+      <Header />
       <Outlet />
-    </div>
+    </>
   );
 }
 
