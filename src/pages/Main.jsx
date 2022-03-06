@@ -1,7 +1,11 @@
+import { SortingForm } from "../components"
+import { DisplayGrid } from "../components/DisplayGrid"
+
 export const Main = () => {
   return (
-    <div>
-      <h1>This is main page</h1>
-    </div>
+    <>
+      <SortingForm />
+      <DisplayGrid />
+    </>
   )
 } 
