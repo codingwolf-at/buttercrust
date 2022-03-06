@@ -1,5 +1,4 @@
-import { SortingForm } from "../components"
-import { DisplayGrid } from "../components/DisplayGrid"
+import { SortingForm, DisplayGrid } from "../components"
 
 export const Main = () => {
   return (
