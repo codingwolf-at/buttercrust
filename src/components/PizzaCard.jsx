@@ -1,5 +1,5 @@
 import { AddShoppingCart } from "@mui/icons-material"
-import { Card, CardContent, Rating, CardMedia, CardActions, Button, Typography, Grid, Chip } from "@mui/material"
+import { Card, CardContent, Rating, CardMedia, CardActions, Button, Typography, Grid, Chip, Box } from "@mui/material"
 
 export const PizzaCard = ({ pizza }) => {
   return (
@@ -12,21 +12,23 @@ export const PizzaCard = ({ pizza }) => {
           alt="dish image"
         />
         <CardContent sx = {{ position: 'relative' }}>
-          <Chip
-            sx = {{
-              position: "absolute",
-              right: "1rem"
-            }} 
-            label="Veg"
-          />
-          <Typography gutterBottom variant="h4" component="h2">
+          <Typography gutterBottom variant="h5" component="h2">
               { pizza.name } 
           </Typography>
-          <Rating name="pizza-rating" precision={0.5} value={pizza.rating} readOnly />
+          <Box 
+            sx = {{
+              display: "flex",
+              alignItems: "center",
+              marginBottom: "1rem"
+            }}
+          >
+            <Rating name="pizza-rating" precision={0.5} value={pizza.rating} readOnly />
+            <Chip label={pizza.isVeg ? "Veg" : "Non-Veg"} size="small" sx = {{ marginLeft: "0.5rem" }} />
+          </Box>
           <Typography variant="body1" color="text.secondary">
             { pizza.description }
           </Typography>
-          <Typography variant="h5" component="h3">
+          <Typography variant="h6" component="h3">
             ₹{ pizza.price }
           </Typography>
         </CardContent>

@@ -6,10 +6,10 @@ export const DisplayGrid = () => {
   const { menu } = useStore();
   return (
     <Container maxWidth='lg'>
-      <Grid container spacing={5}>
+      <Grid container spacing={8}>
         {
           menu.length > 0
-          ? menu.map(pizza => (<PizzaCard pizza={pizza} />))
+          ? menu.map(pizza => (<PizzaCard key={pizza.id} pizza={pizza} />))
           : "Loading..."
         }
       </Grid>
