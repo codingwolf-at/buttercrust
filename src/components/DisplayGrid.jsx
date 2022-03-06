@@ -6,7 +6,7 @@ export const DisplayGrid = () => {
   const { menu } = useStore();
   return (
     <Container maxWidth='lg'>
-      <Grid container spacing={8}>
+      <Grid container spacing={6}>
         {
           menu.length > 0
           ? menu.map(pizza => (<PizzaCard key={pizza.id} pizza={pizza} />))
