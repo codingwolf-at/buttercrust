@@ -1,13 +1,11 @@
-import { Card, CardContent, CardMedia, Container, Grid, Typography, Button } from "@mui/material"
+import { Card, CardContent, CardMedia, Container, Grid, Typography, Button, ButtonGroup } from "@mui/material"
 import { ArrowForward } from "@mui/icons-material";
 import { useStore } from "../contexts"
 
 export const Cart = () => {
-  const { cart } = useStore();
+  const { cart, dispatch } = useStore();
 
-  const totalCartValue = cart.reduce((acc, value) => acc + value.price, 0);
-
-  console.log(totalCartValue);
+  const totalCartValue = cart.reduce((acc, value) => acc + (value.price * value.quantity), 0);
 
   return (
     <Container maxWidth="md">
@@ -30,9 +28,14 @@ export const Cart = () => {
                   <Typography variant="subtitle1" color="text.secondary" component="div">
                     {pizza.sizeChosen}
                   </Typography>
-                  <Typography variant="h6" component="div">
-                    ₹{pizza.price}
+                  <Typography variant="h6" component="div" gutterBottom>
+                    ₹{pizza.price} x {pizza.quantity}
                   </Typography>
+                  <ButtonGroup variant="contained" aria-label="outlined button group">
+                    <Button onClick={() => dispatch({ type: "DECR_QTY", payload: pizza.id })}>-</Button>
+                    <Button disabled>{pizza.quantity}</Button>
+                    <Button onClick={() => dispatch({ type: "INCR_QTY", payload: pizza.id })}>+</Button>
+                  </ButtonGroup>
                 </CardContent>
               </Card>
             ))
