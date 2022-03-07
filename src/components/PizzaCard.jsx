@@ -11,7 +11,7 @@ export const PizzaCard = ({ pizza }) => {
   const handleOpen = () => modalSetOpen(true);
 
   const handleClose = () => {
-    dispatch({ type: "ADD_TO_CART", payload: { ...pizza, sizeChosen: size} })
+    dispatch({ type: "ADD_TO_CART", payload: { ...pizza, sizeChosen: size, quantity: 1 }})
     modalSetOpen(false);
   };
   
