@@ -1,9 +1,8 @@
-import { SortingForm, DisplayGrid } from "../components"
+import { DisplayGrid } from "../components"
 
 export const Main = () => {
   return (
     <>
-      <SortingForm />
       <DisplayGrid />
     </>
   )

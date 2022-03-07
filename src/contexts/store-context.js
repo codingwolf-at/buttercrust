@@ -13,6 +13,45 @@ export const StoreProvider = ({ children }) => {
           ...state,
           menu: action.payload
         };
+      case "ADD_TO_CART":
+        return {
+          ...state,
+          cart: [
+            ...state.cart, action.payload
+          ]
+        };
+      case "INCR_QTY":
+        return {
+          ...state,
+          cart: state.cart.map(pizza => {
+            if (pizza.id === action.payload) {
+              return {
+                ...pizza,
+                quantity: pizza.quantity + 1
+              }
+            } else {
+              return pizza
+            }
+          })
+        };
+      case "DECR_QTY":
+        return {
+          ...state,
+          cart: state.cart.map(pizza => {
+            if (pizza.id === action.payload) {
+              if (pizza.quantity === 1) {
+                return pizza;
+              } else {
+                return {
+                  ...pizza,
+                  quantity: pizza.quantity - 1
+                }
+              }
+            } else {
+              return pizza;
+            }
+          })
+        }
       default:
         return state;
     }

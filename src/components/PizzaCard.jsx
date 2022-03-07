@@ -1,7 +1,37 @@
 import { AddShoppingCart } from "@mui/icons-material"
-import { Card, CardContent, Rating, CardMedia, CardActions, Button, Typography, Grid, Chip, Box } from "@mui/material"
+import { Card, CardContent, Rating, CardMedia, CardActions, Button, Typography, Grid, Chip, Modal, Box, FormControl, FormLabel, RadioGroup, FormControlLabel, Radio } from "@mui/material"
+import { useState } from "react"
+import { useStore } from "../contexts"
 
 export const PizzaCard = ({ pizza }) => {
+  const [modalOpen, modalSetOpen] = useState(false);
+  const [size, setSize] = useState('Regular');
+  const { dispatch } = useStore();
+
+  const handleOpen = () => modalSetOpen(true);
+
+  const handleClose = () => {
+    dispatch({ type: "ADD_TO_CART", payload: { ...pizza, sizeChosen: size, quantity: 1 }})
+    modalSetOpen(false);
+  };
+  
+  const handleRadioChange = (event) => {
+    setSize(event.target.value);
+  };
+ 
+  const style = {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    minWidth: 400,
+    bgcolor: 'background.paper',
+    boxShadow: 24,
+    p: 4,
+    display: "flex",
+    flexDirection: "column"
+  };
+
   return (
     <Grid item xs={12} lg={4}> 
       <Card>
@@ -33,9 +63,42 @@ export const PizzaCard = ({ pizza }) => {
           </Typography>
         </CardContent>
         <CardActions>
-          <Button size='large' color="primary" variant="contained" fullWidth startIcon={<AddShoppingCart />}>
+          <Button onClick={handleOpen} size='large' color="primary" variant="contained" fullWidth startIcon={<AddShoppingCart />}>
             Add to cart
           </Button>
+          <Modal
+            open={modalOpen}
+            onClose={handleClose}
+            aria-labelledby="modal-modal-title"
+            aria-describedby="modal-modal-description"
+          >
+            <Box sx={style}>
+              <Typography id="modal-modal-title" variant="h6" component="h2" gutterBottom>
+                Confirm Order Item
+              </Typography>
+              <FormControl>
+                <FormLabel>Size</FormLabel>
+                <RadioGroup
+                  name="radio-buttons-group"
+                  value={size}
+                  onChange={handleRadioChange}
+                  row
+                >
+                  <FormControlLabel value="Regular" control={<Radio />} label="Regular" />
+                  <FormControlLabel value="Medium" control={<Radio />} label="Medium" />
+                  <FormControlLabel value="Large" control={<Radio />} label="Large" />
+                </RadioGroup>
+              </FormControl>
+              <FormControl>
+                {/* <FormLabel>Toppings</FormLabel> */}
+                {/* <FormControlLabel onChange={(e) => handleCheckboxChange(e)} control={<Checkbox />} label="Label" />
+                <FormControlLabel onChange={(e) => handleCheckboxChange(e)} control={<Checkbox />} label="Disabled" /> */}
+              </FormControl>
+              <Button onClick={handleClose} variant="container">
+                Done
+              </Button>
+            </Box>
+          </Modal>
         </CardActions>
       </Card>
     </Grid>
