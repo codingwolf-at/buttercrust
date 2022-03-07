@@ -5,7 +5,7 @@ import { useStore } from "../contexts"
 
 export const PizzaCard = ({ pizza }) => {
   const [modalOpen, modalSetOpen] = useState(false);
-  const [size, setSize] = useState('regular');
+  const [size, setSize] = useState('Regular');
   const { dispatch } = useStore();
 
   const handleOpen = () => modalSetOpen(true);
@@ -84,9 +84,9 @@ export const PizzaCard = ({ pizza }) => {
                   onChange={handleRadioChange}
                   row
                 >
-                  <FormControlLabel value="regular" control={<Radio />} label="Regular" />
-                  <FormControlLabel value="medium" control={<Radio />} label="Medium" />
-                  <FormControlLabel value="large" control={<Radio />} label="Large" />
+                  <FormControlLabel value="Regular" control={<Radio />} label="Regular" />
+                  <FormControlLabel value="Medium" control={<Radio />} label="Medium" />
+                  <FormControlLabel value="Large" control={<Radio />} label="Large" />
                 </RadioGroup>
               </FormControl>
               <FormControl>
